@@ -24,6 +24,7 @@ services:
     environment:
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: memorablepassword
+      GF_INSTALL_PLUGINS: marcusolsson-csv-datasource
     volumes:
       - grafana-storage:/var/lib/grafana
       - ./grafana.ini:/etc/grafana/grafana.ini
