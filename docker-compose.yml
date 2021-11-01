@@ -18,7 +18,7 @@ services:
       - 9090:9090
     extra_hosts:
       - "host.docker.internal:host-gateway"
-   
+
   grafana:
     image: grafana/grafana:latest
     environment:
@@ -34,14 +34,14 @@ services:
     ports:
       - 3000:3000
 
-  node-exporter:
-    image: prom/node-exporter:latest
-    container_name: monitoring_node_exporter
-    restart: unless-stopped
-    volumes:
-      - "/:/host:ro,rslave"
-    command:
-      - "--path.rootfs=/host"
-    pid: host
-    #network_mode: host
-    expose: [9100]
+#  node-exporter:
+#    image: prom/node-exporter:latest
+#    container_name: monitoring_node_exporter
+#    restart: unless-stopped
+#    volumes:
+#      - "/:/host:ro,rslave"
+#    command:
+#      - "--path.rootfs=/host"
+#    pid: host
+#    #network_mode: host
+#    expose: [9100]
