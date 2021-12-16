@@ -27,4 +27,9 @@ https://stackoverflow.com/questions/64768618/ufw-forbids-docker-container-to-con
 
 requires CSV plugin: https://github.com/marcusolsson/grafana-csv-datasource
 
-then import `grafana-dashboard.json`
+then import `dashboards/grafana-dashboard.json`
+
+
+## madiator's dashboard
+
+needs plugin https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource/
