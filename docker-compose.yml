@@ -39,6 +39,8 @@ services:
     command: --metrics_port 7777
     container_name: dht_node_exporter
     restart: unless-stopped
+    ports:
+      - 4444:4444
 
 #  node-exporter:
 #    image: prom/node-exporter:latest
