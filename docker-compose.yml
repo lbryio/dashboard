@@ -34,6 +34,12 @@ services:
     ports:
       - 3000:3000
 
+  dht-exporter:
+    image: lbry/dht-bootstrap:latest
+    command: --metrics_port 7777
+    container_name: dht_node_exporter
+    restart: unless-stopped
+
 #  node-exporter:
 #    image: prom/node-exporter:latest
 #    container_name: monitoring_node_exporter
