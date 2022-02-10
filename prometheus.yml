@@ -34,7 +34,7 @@ scrape_configs:
   scheme: http
   static_configs:
   - targets:
-    - host.docker.internal:2113
+    - host.docker.internal:7777
 
 - job_name: lbcd
   metrics_path: /

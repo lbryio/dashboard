@@ -1,58 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_NODES.MADIATOR.COM",
-      "label": "nodes.madiator.com",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "marcusolsson-csv-datasource",
-      "pluginName": "CSV"
-    }
-  ],
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "geomap",
-      "name": "Geomap",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "marcusolsson-csv-datasource",
-      "name": "CSV",
-      "version": "0.6.1"
-    },
-    {
-      "type": "panel",
-      "id": "stat",
-      "name": "Stat",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "text",
-      "name": "Text",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -74,14 +20,12 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": null,
   "graphTooltip": 0,
-  "id": null,
+  "id": 6,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "datasource": null,
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -93,12 +37,11 @@
         "content": "# Metrics\n\n- Percent of all published data hosted\n- Desktop app retention\n- Desktop app WAU\n- Blockchain metrics? # claims, # channels, TVL",
         "mode": "markdown"
       },
-      "pluginVersion": "",
+      "pluginVersion": "8.3.4",
       "title": "TODO",
       "type": "text"
     },
     {
-      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -110,7 +53,6 @@
       "type": "row"
     },
     {
-      "datasource": null,
       "gridPos": {
         "h": 5,
         "w": 3,
@@ -122,12 +64,15 @@
         "content": "\n# Blockchain",
         "mode": "markdown"
       },
-      "pluginVersion": "",
+      "pluginVersion": "8.3.4",
       "title": "Panel Title",
       "type": "text"
     },
     {
-      "datasource": "${DS_NODES.MADIATOR.COM}",
+      "datasource": {
+        "type": "marcusolsson-csv-datasource",
+        "uid": "bqtMYPbnk"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -168,7 +113,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -199,7 +144,10 @@
       "type": "stat"
     },
     {
-      "datasource": "${DS_NODES.MADIATOR.COM}",
+      "datasource": {
+        "type": "marcusolsson-csv-datasource",
+        "uid": "bqtMYPbnk"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -244,7 +192,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -306,7 +254,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "gridPos": {
         "h": 5,
         "w": 3,
@@ -318,44 +265,15 @@
         "content": "# Data",
         "mode": "markdown"
       },
-      "pluginVersion": "",
+      "pluginVersion": "8.3.4",
       "title": "Panel Title",
       "type": "text"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
@@ -382,52 +300,41 @@
       },
       "id": 22,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "single"
-        }
+        "textMode": "auto"
       },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "max(dht_node_peer_x_bit_colliding{amount=\"8\"}*256 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"9\"}*512 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"10\"}*1024 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"11\"}*2048 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"12\"}*4096 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"13\"}*8192 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"14\"}*16384 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"15\"}*32768 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"16\"}*65536 or vector(0))",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
       "title": "DHT Nodes (estimated)",
-      "type": "timeseries"
+      "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
@@ -442,7 +349,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -454,20 +362,37 @@
       },
       "id": 28,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "single"
-        }
+        "textMode": "auto"
       },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "(dht_node_stored_blobs_x_bytes_colliding{amount=\"1\"} *2) / 59093.0",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
       "title": "Total Data Hosted (estimated)",
-      "type": "timeseries"
+      "type": "stat"
     },
     {
-      "datasource": null,
       "gridPos": {
         "h": 5,
         "w": 3,
@@ -479,12 +404,11 @@
         "content": "# Hubs",
         "mode": "markdown"
       },
-      "pluginVersion": "",
+      "pluginVersion": "8.3.4",
       "title": "Panel Title",
       "type": "text"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -556,7 +480,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -637,7 +560,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "gridPos": {
         "h": 5,
         "w": 3,
@@ -649,12 +571,11 @@
         "content": "# Apps",
         "mode": "markdown"
       },
-      "pluginVersion": "",
+      "pluginVersion": "8.3.4",
       "title": "Panel Title",
       "type": "text"
     },
     {
-      "datasource": null,
       "description": "- LBRY Desktop\n- Odysee",
       "fieldConfig": {
         "defaults": {
@@ -696,7 +617,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "exemplar": true,
@@ -711,7 +632,6 @@
     },
     {
       "collapsed": false,
-      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -724,7 +644,6 @@
       "type": "row"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -766,7 +685,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "exemplar": true,
@@ -781,7 +700,10 @@
       "type": "stat"
     },
     {
-      "datasource": "${DS_NODES.MADIATOR.COM}",
+      "datasource": {
+        "type": "marcusolsson-csv-datasource",
+        "uid": "bqtMYPbnk"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -822,7 +744,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -882,7 +804,10 @@
       "type": "stat"
     },
     {
-      "datasource": "${DS_NODES.MADIATOR.COM}",
+      "datasource": {
+        "type": "marcusolsson-csv-datasource",
+        "uid": "bqtMYPbnk"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -917,6 +842,13 @@
       },
       "id": 6,
       "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": true,
         "sortBy": [
           {
@@ -925,7 +857,7 @@
           }
         ]
       },
-      "pluginVersion": "",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -954,7 +886,10 @@
       "type": "table"
     },
     {
-      "datasource": "${DS_NODES.MADIATOR.COM}",
+      "datasource": {
+        "type": "marcusolsson-csv-datasource",
+        "uid": "bqtMYPbnk"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -987,6 +922,7 @@
       "options": {
         "basemap": {
           "config": {},
+          "name": "Layer 0",
           "type": "default"
         },
         "controls": {
@@ -999,23 +935,42 @@
         "layers": [
           {
             "config": {
-              "color": {
-                "fixed": "purple"
-              },
-              "fillOpacity": 0.6,
-              "shape": "circle",
               "showLegend": true,
-              "size": {
-                "field": "address (count)",
-                "fixed": 5,
-                "max": 15,
-                "min": 2
+              "style": {
+                "color": {
+                  "fixed": "purple"
+                },
+                "opacity": 0.6,
+                "rotation": {
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "mod"
+                },
+                "size": {
+                  "field": "address (count)",
+                  "fixed": 5,
+                  "max": 15,
+                  "min": 2
+                },
+                "symbol": {
+                  "fixed": "img/icons/marker/circle.svg",
+                  "mode": "fixed"
+                },
+                "textConfig": {
+                  "fontSize": 12,
+                  "offsetX": 0,
+                  "offsetY": 0,
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
               }
             },
             "location": {
               "lookup": "country",
               "mode": "lookup"
             },
+            "name": "Layer 1",
             "type": "markers"
           }
         ],
@@ -1026,7 +981,7 @@
           "zoom": 1.8
         }
       },
-      "pluginVersion": "8.2.2",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -1071,7 +1026,6 @@
     },
     {
       "collapsed": false,
-      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1084,7 +1038,6 @@
       "type": "row"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1125,11 +1078,15 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "dht_node_known_peers",
+          "expr": "dht_node_peers_in_routing_table",
           "interval": "",
           "legendFormat": "known peers",
           "refId": "A"
@@ -1137,10 +1094,184 @@
       ],
       "title": "DHT Node Peers",
       "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 59
+      },
+      "id": 38,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "dht_node_storing_peers",
+          "interval": "",
+          "legendFormat": "known peers",
+          "refId": "A"
+        }
+      ],
+      "title": "DHT Announcing Peers",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 59
+      },
+      "id": 40,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "dht_node_stored_blobs",
+          "interval": "",
+          "legendFormat": "known peers",
+          "refId": "A"
+        }
+      ],
+      "title": "DHT Total Stored Blobs",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 64
+      },
+      "id": 39,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "sum(dht_node_peer_x_bit_colliding) * 256",
+          "interval": "",
+          "legendFormat": "known peers",
+          "refId": "A"
+        }
+      ],
+      "title": "DHT Peers estimated from old method",
+      "type": "stat"
     }
   ],
   "refresh": "15m",
-  "schemaVersion": 31,
+  "schemaVersion": 34,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1154,5 +1285,6 @@
   "timezone": "",
   "title": "LBRY",
   "uid": "zqY5GYO7k",
-  "version": 16
+  "version": 2,
+  "weekStart": ""
 }
