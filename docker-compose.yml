@@ -34,10 +34,9 @@ services:
     ports:
       - 3000:3000
 
-  dht-exporter:
+  dht:
     image: lbry/dht-bootstrap:latest
     command: --metrics_port 7777
-    container_name: dht_node_exporter
     restart: unless-stopped
     network_mode: "host"
     ports:
