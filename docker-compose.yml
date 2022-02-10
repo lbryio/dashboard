@@ -39,8 +39,8 @@ services:
     command: --metrics_port 7777
     restart: unless-stopped
     network_mode: "host"
-    ports:
-      - 4444:4444/udp
+    #ports:
+    #  - 4444:4444/udp
 
 #  node-exporter:
 #    image: prom/node-exporter:latest
