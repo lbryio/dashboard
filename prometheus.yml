@@ -36,6 +36,13 @@ scrape_configs:
   - targets:
     - host.docker.internal:7777
 
+- job_name: dht_crawler
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
+    - host.docker.internal:8080
+
 - job_name: lbcd
   metrics_path: /
   scheme: http
