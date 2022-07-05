@@ -72,6 +72,103 @@
                 "value": 80
               }
             ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "dht_crawler_node_reachable_hosts",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "dht_crawler_node_unique_total_hosts",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        }
+      ],
+      "title": "Reachable vs known",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           },
           "unit": "percentunit"
         },
@@ -81,7 +178,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 16
       },
       "id": 12,
       "options": {
@@ -167,7 +264,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 16
       },
       "id": 21,
       "options": {
@@ -252,7 +349,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 24
       },
       "id": 13,
       "options": {
@@ -338,7 +435,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 24
       },
       "id": 20,
       "options": {
@@ -423,7 +520,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 16
+        "y": 32
       },
       "id": 15,
       "options": {
@@ -509,7 +606,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 16
+        "y": 32
       },
       "id": 19,
       "options": {
@@ -594,7 +691,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 24
+        "y": 40
       },
       "id": 16,
       "options": {
@@ -680,7 +777,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 24
+        "y": 40
       },
       "id": 18,
       "options": {
@@ -765,7 +862,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 32
+        "y": 48
       },
       "id": 14,
       "options": {
@@ -850,7 +947,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 32
+        "y": 48
       },
       "id": 17,
       "options": {
@@ -879,508 +976,6 @@
       ],
       "title": "Hosts with errors",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "frser-sqlite-datasource",
-        "uid": "DdgpDKjnz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 70
-              },
-              {
-                "color": "red",
-                "value": 85
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 40
-      },
-      "id": 9,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": false
-      },
-      "pluginVersion": "8.4.0-beta1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "frser-sqlite-datasource",
-            "uid": "DdgpDKjnz"
-          },
-          "queryText": "select count(distinct address) from peer where latency > 0 and last_check > datetime('now', '-1 hour')",
-          "queryType": "table",
-          "rawQueryText": "select count(distinct address) from peer where latency > 0 and last_check > datetime('now', '-1 hour')",
-          "refId": "A",
-          "timeColumns": [
-            "time",
-            "ts"
-          ]
-        }
-      ],
-      "title": "Reachable peers (1h)",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "frser-sqlite-datasource",
-        "uid": "DdgpDKjnz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 70
-              },
-              {
-                "color": "red",
-                "value": 85
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 40
-      },
-      "id": 8,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": false
-      },
-      "pluginVersion": "8.4.0-beta1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "frser-sqlite-datasource",
-            "uid": "DdgpDKjnz"
-          },
-          "queryText": "select count(*) from peer where last_seen > datetime('now', '-1 hour')",
-          "queryType": "table",
-          "rawQueryText": "select count(*) from peer where last_seen > datetime('now', '-1 hour')",
-          "refId": "A",
-          "timeColumns": [
-            "time",
-            "ts"
-          ]
-        }
-      ],
-      "title": "Recently seen peers (1h)",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "frser-sqlite-datasource",
-        "uid": "DdgpDKjnz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 70
-              },
-              {
-                "color": "red",
-                "value": 85
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 48
-      },
-      "id": 10,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": false
-      },
-      "pluginVersion": "8.4.0-beta1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "frser-sqlite-datasource",
-            "uid": "DdgpDKjnz"
-          },
-          "queryText": "select count(*) from peer",
-          "queryType": "table",
-          "rawQueryText": "select count(*) from peer",
-          "refId": "A",
-          "timeColumns": [
-            "time",
-            "ts"
-          ]
-        }
-      ],
-      "title": "Total sessions (full history)",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "frser-sqlite-datasource",
-        "uid": "DdgpDKjnz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [],
-          "max": 10000,
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 20
-              },
-              {
-                "color": "red",
-                "value": 85
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 48
-      },
-      "id": 6,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "8.4.0-beta1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "frser-sqlite-datasource",
-            "uid": "DdgpDKjnz"
-          },
-          "queryText": "select count(*) from peer where last_seen > datetime('now', '-1 hour') and (last_check < datetime('now', '-1 hour') or last_check is NULL)",
-          "queryType": "table",
-          "rawQueryText": "select count(*) from peer where last_seen > datetime('now', '-1 hour') and (last_check < datetime('now', '-1 hour') or last_check is NULL)",
-          "refId": "A",
-          "timeColumns": [
-            "time",
-            "ts"
-          ]
-        }
-      ],
-      "title": "Pending check",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "frser-sqlite-datasource",
-        "uid": "DdgpDKjnz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "semi-dark-yellow",
-                "value": 600
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 1200
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 56
-      },
-      "id": 4,
-      "options": {
-        "basemap": {
-          "config": {},
-          "name": "Layer 0",
-          "type": "default"
-        },
-        "controls": {
-          "mouseWheelZoom": true,
-          "showAttribution": true,
-          "showDebug": false,
-          "showScale": false,
-          "showZoom": true
-        },
-        "layers": [
-          {
-            "config": {
-              "showLegend": true,
-              "style": {
-                "color": {
-                  "field": "latency/1000000",
-                  "fixed": "dark-green"
-                },
-                "opacity": 0.4,
-                "rotation": {
-                  "fixed": 0,
-                  "max": 360,
-                  "min": -360,
-                  "mode": "mod"
-                },
-                "size": {
-                  "fixed": 5,
-                  "max": 15,
-                  "min": 2
-                },
-                "symbol": {
-                  "fixed": "img/icons/marker/circle.svg",
-                  "mode": "fixed"
-                },
-                "textConfig": {
-                  "fontSize": 12,
-                  "offsetX": 0,
-                  "offsetY": 0,
-                  "textAlign": "center",
-                  "textBaseline": "middle"
-                }
-              }
-            },
-            "location": {
-              "latitude": "lat",
-              "longitude": "long",
-              "mode": "coords"
-            },
-            "name": "Layer 1",
-            "tooltip": true,
-            "type": "markers"
-          }
-        ],
-        "view": {
-          "id": "zero",
-          "lat": 0,
-          "lon": 0,
-          "zoom": 1
-        }
-      },
-      "pluginVersion": "8.4.0-beta1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "frser-sqlite-datasource",
-            "uid": "DdgpDKjnz"
-          },
-          "queryText": "select latency/1000000, * from geoip join peer on geoip.peer_id=peer.peer_id where latency>0 and last_check > datetime('now', '-1 hour')",
-          "queryType": "table",
-          "rawQueryText": "select latency/1000000, * from geoip join peer on geoip.peer_id=peer.peer_id where latency>0 and last_check > datetime('now', '-1 hour')",
-          "refId": "A",
-          "timeColumns": [
-            "time",
-            "ts"
-          ]
-        }
-      ],
-      "title": "Reachable",
-      "type": "geomap"
-    },
-    {
-      "datasource": {
-        "type": "frser-sqlite-datasource",
-        "uid": "DdgpDKjnz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "dark-red",
-                "value": null
-              },
-              {
-                "color": "dark-green",
-                "value": 1
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 56
-      },
-      "id": 2,
-      "options": {
-        "basemap": {
-          "config": {},
-          "name": "Layer 0",
-          "type": "default"
-        },
-        "controls": {
-          "mouseWheelZoom": true,
-          "showAttribution": true,
-          "showDebug": false,
-          "showScale": false,
-          "showZoom": true
-        },
-        "layers": [
-          {
-            "config": {
-              "blur": 15,
-              "radius": 5,
-              "weight": {
-                "fixed": 1,
-                "max": 1,
-                "min": 0
-              }
-            },
-            "location": {
-              "latitude": "lat",
-              "longitude": "long",
-              "mode": "coords"
-            },
-            "name": "Layer 1",
-            "tooltip": true,
-            "type": "heatmap"
-          }
-        ],
-        "view": {
-          "id": "zero",
-          "lat": 0,
-          "lon": 0,
-          "zoom": 1
-        }
-      },
-      "pluginVersion": "8.4.0-beta1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "frser-sqlite-datasource",
-            "uid": "DdgpDKjnz"
-          },
-          "queryText": "select lat, long, address, case when latency is null then 9999 else latency/1000000 end as latency, peer.* from geoip join peer on peer.peer_id = geoip.peer_id where peer.last_check > datetime('now', '-1 day')",
-          "queryType": "table",
-          "rawQueryText": "select lat, long, address, case when latency is null then 9999 else latency/1000000 end as latency, peer.* from geoip join peer on peer.peer_id = geoip.peer_id where peer.last_check > datetime('now', '-1 day')",
-          "refId": "A",
-          "timeColumns": [
-            "time",
-            "ts"
-          ]
-        }
-      ],
-      "title": "Heatmap 24h",
-      "type": "geomap"
     }
   ],
   "refresh": "",
@@ -1391,13 +986,13 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "DHT",
   "uid": "ZrQh5Kjnk",
-  "version": 23,
+  "version": 26,
   "weekStart": ""
 }
