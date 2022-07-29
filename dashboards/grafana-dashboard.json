@@ -20,12 +20,14 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
+  "gnetId": null,
   "graphTooltip": 0,
   "id": 6,
   "links": [],
   "liveNow": false,
   "panels": [
     {
+      "datasource": null,
       "gridPos": {
         "h": 5,
         "w": 12,
@@ -37,11 +39,12 @@
         "content": "- Desktop app retention / WAU\n- Hubs: how many, what jurisdictions?\n- Blockchain metrics? # claims, # channels, TVL",
         "mode": "markdown"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "title": "TODO",
       "type": "text"
     },
     {
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -53,6 +56,7 @@
       "type": "row"
     },
     {
+      "datasource": null,
       "gridPos": {
         "h": 5,
         "w": 3,
@@ -64,14 +68,12 @@
         "content": "\n# Blockchain",
         "mode": "markdown"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "title": "Panel Title",
       "type": "text"
     },
     {
-      "datasource": {
-        "uid": "nodes.madiator.com"
-      },
+      "datasource": "nodes.madiator.com",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -112,7 +114,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -143,9 +145,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "uid": "nodes.madiator.com"
-      },
+      "datasource": "nodes.madiator.com",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -190,7 +190,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -252,6 +252,7 @@
       "type": "stat"
     },
     {
+      "datasource": null,
       "gridPos": {
         "h": 5,
         "w": 3,
@@ -263,11 +264,12 @@
         "content": "# Data",
         "mode": "markdown"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "title": "Panel Title",
       "type": "text"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -312,7 +314,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "datasource": {
@@ -320,7 +322,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "dht_crawler_node_unique_total_hosts",
+          "expr": "max(dht_node_peer_x_bit_colliding{amount=\"8\"}*256 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"9\"}*512 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"10\"}*1024 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"11\"}*2048 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"12\"}*4096 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"13\"}*8192 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"14\"}*16384 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"15\"}*32768 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"16\"}*65536 or vector(0))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -330,6 +332,7 @@
       "type": "stat"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -375,95 +378,6 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.0-beta1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "dht_crawler_node_working_streams_total / dht_crawler_node_probed_streams_total",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "Downloadable streams",
-      "type": "stat"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 11,
-        "w": 18,
-        "x": 0,
-        "y": 16
-      },
-      "id": 41,
-      "options": {
-        "legend": {
-          "calcs": [
-            "last"
-          ],
-          "displayMode": "list",
-          "placement": "right"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
       "pluginVersion": "8.2.2",
       "targets": [
         {
@@ -472,28 +386,17 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "dht_crawler_node_unique_total_hosts",
+          "expr": "(dht_node_stored_blobs_x_bytes_colliding{amount=\"1\"} *2) / 59093.0",
           "interval": "",
-          "legendFormat": "Known",
+          "legendFormat": "",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "dht_crawler_node_reachable_hosts",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Reachable",
-          "refId": "B"
         }
       ],
-      "title": "DHT Network Size",
-      "type": "timeseries"
+      "title": "Total Data Hosted (estimated)",
+      "type": "stat"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -549,9 +452,9 @@
         "h": 11,
         "w": 18,
         "x": 0,
-        "y": 27
+        "y": 16
       },
-      "id": 42,
+      "id": 41,
       "options": {
         "legend": {
           "calcs": [
@@ -561,8 +464,7 @@
           "placement": "right"
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "single"
         }
       },
       "pluginVersion": "8.2.2",
@@ -573,68 +475,34 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "rate(dht_crawler_node_announced_streams_total[1h]) / rate(dht_crawler_node_probed_streams_total[1h])",
+          "expr": "(dht_node_stored_blobs_x_bytes_colliding{amount=\"1\"} *2) / 59093.0",
           "interval": "",
-          "legendFormat": "Announced (1h)",
+          "legendFormat": "Hosted",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "dht_crawler_node_working_streams_total / dht_crawler_node_probed_streams_total",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Reachable",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "dht_crawler_node_announced_streams_total / dht_crawler_node_probed_streams_total",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Announced",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "rate(dht_crawler_node_working_streams_total[1h]) / rate(dht_crawler_node_probed_streams_total[1h])",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Reachable (1h)",
-          "refId": "D"
         }
       ],
       "title": "Total Data Hosted (estimated)",
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "gridPos": {
         "h": 5,
         "w": 3,
         "x": 0,
-        "y": 38
+        "y": 27
       },
       "id": 36,
       "options": {
         "content": "# Hubs",
         "mode": "markdown"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "title": "Panel Title",
       "type": "text"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -689,7 +557,7 @@
         "h": 5,
         "w": 4,
         "x": 3,
-        "y": 38
+        "y": 27
       },
       "id": 24,
       "options": {
@@ -699,14 +567,14 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "single"
         }
       },
       "title": "Hubs",
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -761,7 +629,7 @@
         "h": 5,
         "w": 4,
         "x": 7,
-        "y": 38
+        "y": 27
       },
       "id": 26,
       "options": {
@@ -771,8 +639,7 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "single"
         }
       },
       "targets": [
@@ -788,22 +655,24 @@
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "gridPos": {
         "h": 5,
         "w": 3,
         "x": 0,
-        "y": 43
+        "y": 32
       },
       "id": 37,
       "options": {
         "content": "# Apps",
         "mode": "markdown"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "title": "Panel Title",
       "type": "text"
     },
     {
+      "datasource": null,
       "description": "- LBRY Desktop\n- Odysee",
       "fieldConfig": {
         "defaults": {
@@ -827,7 +696,7 @@
         "h": 5,
         "w": 4,
         "x": 3,
-        "y": 43
+        "y": 32
       },
       "id": 30,
       "options": {
@@ -845,7 +714,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "exemplar": true,
@@ -860,11 +729,12 @@
     },
     {
       "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 37
       },
       "id": 10,
       "panels": [],
@@ -872,6 +742,7 @@
       "type": "row"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -895,7 +766,7 @@
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 49
+        "y": 38
       },
       "id": 4,
       "options": {
@@ -913,7 +784,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "exemplar": true,
@@ -928,9 +799,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "uid": "nodes.madiator.com"
-      },
+      "datasource": "nodes.madiator.com",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -953,7 +822,7 @@
         "h": 5,
         "w": 5,
         "x": 6,
-        "y": 49
+        "y": 38
       },
       "id": 32,
       "options": {
@@ -971,7 +840,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -1031,9 +900,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "uid": "nodes.madiator.com"
-      },
+      "datasource": "nodes.madiator.com",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1064,7 +931,7 @@
         "h": 10,
         "w": 16,
         "x": 0,
-        "y": 54
+        "y": 43
       },
       "id": 6,
       "options": {
@@ -1083,7 +950,7 @@
           }
         ]
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -1112,20 +979,11 @@
       "type": "table"
     },
     {
-      "datasource": {
-        "uid": "nodes.madiator.com"
-      },
+      "datasource": "nodes.madiator.com",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
-          },
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
           },
           "mappings": [],
           "thresholds": {
@@ -1148,7 +1006,7 @@
         "h": 13,
         "w": 16,
         "x": 0,
-        "y": 64
+        "y": 53
       },
       "id": 12,
       "options": {
@@ -1213,7 +1071,7 @@
           "zoom": 1.8
         }
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -1258,11 +1116,12 @@
     },
     {
       "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 77
+        "y": 66
       },
       "id": 8,
       "panels": [],
@@ -1270,6 +1129,7 @@
       "type": "row"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1292,7 +1152,7 @@
         "h": 5,
         "w": 3,
         "x": 0,
-        "y": 78
+        "y": 67
       },
       "id": 2,
       "options": {
@@ -1310,7 +1170,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "datasource": {
@@ -1328,6 +1188,7 @@
       "type": "stat"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1350,7 +1211,7 @@
         "h": 5,
         "w": 6,
         "x": 3,
-        "y": 78
+        "y": 67
       },
       "id": 38,
       "options": {
@@ -1368,7 +1229,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "datasource": {
@@ -1386,6 +1247,7 @@
       "type": "stat"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1408,7 +1270,7 @@
         "h": 5,
         "w": 6,
         "x": 9,
-        "y": 78
+        "y": 67
       },
       "id": 40,
       "options": {
@@ -1426,7 +1288,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "datasource": {
@@ -1444,6 +1306,7 @@
       "type": "stat"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1466,7 +1329,7 @@
         "h": 5,
         "w": 4,
         "x": 15,
-        "y": 78
+        "y": 67
       },
       "id": 39,
       "options": {
@@ -1484,7 +1347,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.0-beta1",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "datasource": {
@@ -1503,20 +1366,19 @@
     }
   ],
   "refresh": "15m",
-  "schemaVersion": 35,
+  "schemaVersion": 31,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-2d",
+    "from": "now-14d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "LBRY",
   "uid": "zqY5GYO7k",
-  "version": 1,
-  "weekStart": ""
+  "version": 3
 }
