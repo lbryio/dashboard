@@ -27,17 +27,17 @@
   "panels": [
     {
       "gridPos": {
-        "h": 8,
+        "h": 5,
         "w": 12,
         "x": 0,
         "y": 0
       },
       "id": 20,
       "options": {
-        "content": "# Metrics\n\n- Percent of all published data hosted\n- Desktop app retention\n- Desktop app WAU\n- Blockchain metrics? # claims, # channels, TVL",
+        "content": "- Desktop app retention / WAU\n- Hubs: how many, what jurisdictions?\n- Blockchain metrics? # claims, # channels, TVL",
         "mode": "markdown"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "title": "TODO",
       "type": "text"
     },
@@ -46,7 +46,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 5
       },
       "id": 16,
       "title": "Key Metrics",
@@ -57,21 +57,20 @@
         "h": 5,
         "w": 3,
         "x": 0,
-        "y": 9
+        "y": 6
       },
       "id": 34,
       "options": {
         "content": "\n# Blockchain",
         "mode": "markdown"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "title": "Panel Title",
       "type": "text"
     },
     {
       "datasource": {
-        "type": "marcusolsson-csv-datasource",
-        "uid": "bqtMYPbnk"
+        "uid": "nodes.madiator.com"
       },
       "fieldConfig": {
         "defaults": {
@@ -95,7 +94,7 @@
         "h": 5,
         "w": 4,
         "x": 3,
-        "y": 9
+        "y": 6
       },
       "id": 14,
       "options": {
@@ -113,7 +112,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -145,8 +144,7 @@
     },
     {
       "datasource": {
-        "type": "marcusolsson-csv-datasource",
-        "uid": "bqtMYPbnk"
+        "uid": "nodes.madiator.com"
       },
       "fieldConfig": {
         "defaults": {
@@ -174,7 +172,7 @@
         "h": 5,
         "w": 4,
         "x": 7,
-        "y": 9
+        "y": 6
       },
       "id": 18,
       "options": {
@@ -184,7 +182,7 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "sum"
           ],
           "fields": "",
           "values": false
@@ -192,7 +190,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -258,14 +256,14 @@
         "h": 5,
         "w": 3,
         "x": 0,
-        "y": 14
+        "y": 11
       },
       "id": 35,
       "options": {
         "content": "# Data",
         "mode": "markdown"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "title": "Panel Title",
       "type": "text"
     },
@@ -296,7 +294,7 @@
         "h": 5,
         "w": 4,
         "x": 3,
-        "y": 14
+        "y": 11
       },
       "id": 22,
       "options": {
@@ -311,9 +309,10 @@
           "fields": "",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "datasource": {
@@ -321,7 +320,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "max(dht_node_peer_x_bit_colliding{amount=\"8\"}*256 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"9\"}*512 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"10\"}*1024 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"11\"}*2048 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"12\"}*4096 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"13\"}*8192 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"14\"}*16384 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"15\"}*32768 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"16\"}*65536 or vector(0))",
+          "expr": "dht_crawler_node_unique_total_hosts",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -358,7 +357,7 @@
         "h": 5,
         "w": 4,
         "x": 7,
-        "y": 14
+        "y": 11
       },
       "id": 28,
       "options": {
@@ -373,9 +372,10 @@
           "fields": "",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "datasource": {
@@ -383,28 +383,254 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "(dht_node_stored_blobs_x_bytes_colliding{amount=\"1\"} *2) / 59093.0",
+          "expr": "dht_crawler_node_working_streams_total / dht_crawler_node_probed_streams_total",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "Total Data Hosted (estimated)",
+      "title": "Downloadable streams",
       "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 18,
+        "x": 0,
+        "y": 16
+      },
+      "id": 41,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "list",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "dht_crawler_node_unique_total_hosts",
+          "interval": "",
+          "legendFormat": "Known",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "dht_crawler_node_reachable_hosts",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Reachable",
+          "refId": "B"
+        }
+      ],
+      "title": "DHT Network Size",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 18,
+        "x": 0,
+        "y": 27
+      },
+      "id": 42,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "list",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "rate(dht_crawler_node_announced_streams_total[1h]) / rate(dht_crawler_node_probed_streams_total[1h])",
+          "interval": "",
+          "legendFormat": "Announced (1h)",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "dht_crawler_node_working_streams_total / dht_crawler_node_probed_streams_total",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Reachable",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "dht_crawler_node_announced_streams_total / dht_crawler_node_probed_streams_total",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Announced",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "rate(dht_crawler_node_working_streams_total[1h]) / rate(dht_crawler_node_probed_streams_total[1h])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Reachable (1h)",
+          "refId": "D"
+        }
+      ],
+      "title": "Total Data Hosted (estimated)",
+      "type": "timeseries"
     },
     {
       "gridPos": {
         "h": 5,
         "w": 3,
         "x": 0,
-        "y": 19
+        "y": 38
       },
       "id": 36,
       "options": {
         "content": "# Hubs",
         "mode": "markdown"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "title": "Panel Title",
       "type": "text"
     },
@@ -463,7 +689,7 @@
         "h": 5,
         "w": 4,
         "x": 3,
-        "y": 19
+        "y": 38
       },
       "id": 24,
       "options": {
@@ -473,7 +699,8 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "title": "Hubs",
@@ -534,7 +761,7 @@
         "h": 5,
         "w": 4,
         "x": 7,
-        "y": 19
+        "y": 38
       },
       "id": 26,
       "options": {
@@ -544,7 +771,8 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
@@ -564,14 +792,14 @@
         "h": 5,
         "w": 3,
         "x": 0,
-        "y": 24
+        "y": 43
       },
       "id": 37,
       "options": {
         "content": "# Apps",
         "mode": "markdown"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "title": "Panel Title",
       "type": "text"
     },
@@ -599,7 +827,7 @@
         "h": 5,
         "w": 4,
         "x": 3,
-        "y": 24
+        "y": 43
       },
       "id": 30,
       "options": {
@@ -617,7 +845,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "exemplar": true,
@@ -636,7 +864,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 48
       },
       "id": 10,
       "panels": [],
@@ -667,7 +895,7 @@
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 30
+        "y": 49
       },
       "id": 4,
       "options": {
@@ -685,7 +913,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "exemplar": true,
@@ -701,8 +929,7 @@
     },
     {
       "datasource": {
-        "type": "marcusolsson-csv-datasource",
-        "uid": "bqtMYPbnk"
+        "uid": "nodes.madiator.com"
       },
       "fieldConfig": {
         "defaults": {
@@ -726,7 +953,7 @@
         "h": 5,
         "w": 5,
         "x": 6,
-        "y": 30
+        "y": 49
       },
       "id": 32,
       "options": {
@@ -744,7 +971,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -805,8 +1032,7 @@
     },
     {
       "datasource": {
-        "type": "marcusolsson-csv-datasource",
-        "uid": "bqtMYPbnk"
+        "uid": "nodes.madiator.com"
       },
       "fieldConfig": {
         "defaults": {
@@ -838,7 +1064,7 @@
         "h": 10,
         "w": 16,
         "x": 0,
-        "y": 35
+        "y": 54
       },
       "id": 6,
       "options": {
@@ -853,11 +1079,11 @@
         "sortBy": [
           {
             "desc": false,
-            "displayName": "country"
+            "displayName": "address"
           }
         ]
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -887,13 +1113,19 @@
     },
     {
       "datasource": {
-        "type": "marcusolsson-csv-datasource",
-        "uid": "bqtMYPbnk"
+        "uid": "nodes.madiator.com"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -916,7 +1148,7 @@
         "h": 13,
         "w": 16,
         "x": 0,
-        "y": 45
+        "y": 64
       },
       "id": 12,
       "options": {
@@ -981,7 +1213,7 @@
           "zoom": 1.8
         }
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "decimalSeparator": ".",
@@ -1030,7 +1262,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 58
+        "y": 77
       },
       "id": 8,
       "panels": [],
@@ -1058,9 +1290,9 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 6,
+        "w": 3,
         "x": 0,
-        "y": 59
+        "y": 78
       },
       "id": 2,
       "options": {
@@ -1078,7 +1310,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "datasource": {
@@ -1117,8 +1349,8 @@
       "gridPos": {
         "h": 5,
         "w": 6,
-        "x": 6,
-        "y": 59
+        "x": 3,
+        "y": 78
       },
       "id": 38,
       "options": {
@@ -1136,7 +1368,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "datasource": {
@@ -1175,8 +1407,8 @@
       "gridPos": {
         "h": 5,
         "w": 6,
-        "x": 12,
-        "y": 59
+        "x": 9,
+        "y": 78
       },
       "id": 40,
       "options": {
@@ -1194,7 +1426,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "datasource": {
@@ -1232,9 +1464,9 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 6,
-        "x": 12,
-        "y": 64
+        "w": 4,
+        "x": 15,
+        "y": 78
       },
       "id": 39,
       "options": {
@@ -1252,7 +1484,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.4",
+      "pluginVersion": "8.4.0-beta1",
       "targets": [
         {
           "datasource": {
@@ -1271,20 +1503,20 @@
     }
   ],
   "refresh": "15m",
-  "schemaVersion": 34,
+  "schemaVersion": 35,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "LBRY",
   "uid": "zqY5GYO7k",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }
