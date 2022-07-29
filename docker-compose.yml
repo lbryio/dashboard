@@ -3,6 +3,7 @@ version: "3.3"
 volumes:
   grafana-storage:
   prom-storage:
+  dht-storage:
 
 services:
   prometheus:
@@ -43,12 +44,14 @@ services:
     #  - 4444:4444/udp
 
   dht-crawler:
-    image: lbry/dht-bootstrap:crawler  # metrics at port 8080
+    image: lbry/dht-bootstrap:crawler_with_hosting  # metrics at port 8080
     entrypoint: python3
-    command: scripts/dht_crawler.py
+    command: scripts/dht_crawler.py /database/data.db
     container_name: dht_node_crawler
     restart: unless-stopped
     network_mode: "host"
+    volumes:
+      - dht-storage:/database/
 
 
 #  node-exporter:
