@@ -322,7 +322,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "max(dht_node_peer_x_bit_colliding{amount=\"8\"}*256 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"9\"}*512 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"10\"}*1024 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"11\"}*2048 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"12\"}*4096 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"13\"}*8192 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"14\"}*16384 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"15\"}*32768 or vector(0)) + max(dht_node_peer_x_bit_colliding{amount=\"16\"}*65536 or vector(0))",
+          "expr": "dht_crawler_node_unique_total_hosts",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -386,17 +386,117 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "(dht_node_stored_blobs_x_bytes_colliding{amount=\"1\"} *2) / 59093.0",
+          "expr": "dht_crawler_node_working_streams_total / dht_crawler_node_probed_streams_total",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "Total Data Hosted (estimated)",
+      "title": "Downloadable streams",
       "type": "stat"
     },
     {
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 18,
+        "x": 0,
+        "y": 16
+      },
+      "id": 41,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "list",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "dht_crawler_node_unique_total_hosts",
+          "interval": "",
+          "legendFormat": "Known",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "dht_crawler_node_reachable_hosts",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Reachable",
+          "refId": "B"
+        }
+      ],
+      "title": "DHT Network Size",
+      "type": "timeseries"
+    },
+    {
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -452,9 +552,9 @@
         "h": 11,
         "w": 18,
         "x": 0,
-        "y": 16
+        "y": 27
       },
-      "id": 41,
+      "id": 42,
       "options": {
         "legend": {
           "calcs": [
@@ -464,7 +564,8 @@
           "placement": "right"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.2.2",
@@ -475,10 +576,46 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "(dht_node_stored_blobs_x_bytes_colliding{amount=\"1\"} *2) / 59093.0",
+          "expr": "rate(dht_crawler_node_announced_streams_total[1h]) / rate(dht_crawler_node_probed_streams_total[1h])",
           "interval": "",
-          "legendFormat": "Hosted",
+          "legendFormat": "Announced (1h)",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "dht_crawler_node_working_streams_total / dht_crawler_node_probed_streams_total",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Reachable",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "dht_crawler_node_announced_streams_total / dht_crawler_node_probed_streams_total",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Announced",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "rate(dht_crawler_node_working_streams_total[1h]) / rate(dht_crawler_node_probed_streams_total[1h])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Reachable (1h)",
+          "refId": "D"
         }
       ],
       "title": "Total Data Hosted (estimated)",
@@ -1366,7 +1503,7 @@
     }
   ],
   "refresh": "15m",
-  "schemaVersion": 31,
+  "schemaVersion": 35,
   "style": "dark",
   "tags": [],
   "templating": {
