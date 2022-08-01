@@ -33,3 +33,5 @@ then import `dashboards/grafana-dashboard.json`
 ## madiator's dashboard
 
 needs plugin https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource/
+
+after adding, set the name to "nodes.madiator.com" so they match the dashboard json
