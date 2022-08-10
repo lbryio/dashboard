@@ -50,3 +50,11 @@ scrape_configs:
   static_configs:
   - targets:
     - host.docker.internal:2114
+
+- job_name: wallet_sync
+  metrics_path: /metrics
+  scheme: https
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - dev.lbry.id:8091
