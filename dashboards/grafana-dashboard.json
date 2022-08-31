@@ -322,7 +322,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "dht_crawler_node_unique_total_hosts",
+          "expr": "avg(dht_crawler_node_unique_total_hosts)",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -386,7 +386,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "dht_crawler_node_working_streams_total / dht_crawler_node_probed_streams_total",
+          "expr": "avg(dht_crawler_node_working_streams_total / dht_crawler_node_probed_streams_total)",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -576,7 +576,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "rate(dht_crawler_node_announced_streams_total[1h]) / rate(dht_crawler_node_probed_streams_total[1h])",
+          "expr": "rate(dht_crawler_node_announced_streams_total[2h]) / rate(dht_crawler_node_probed_streams_total[2h])",
+          "hide": false,
           "interval": "",
           "legendFormat": "Announced (1h)",
           "refId": "A"
@@ -587,8 +588,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "dht_crawler_node_working_streams_total / dht_crawler_node_probed_streams_total",
-          "hide": false,
+          "expr": "sum(dht_crawler_node_working_streams_total) / sum(dht_crawler_node_probed_streams_total)",
+          "hide": true,
           "interval": "",
           "legendFormat": "Reachable",
           "refId": "B"
@@ -599,8 +600,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "dht_crawler_node_announced_streams_total / dht_crawler_node_probed_streams_total",
-          "hide": false,
+          "expr": "sum(dht_crawler_node_announced_streams_total) / sum(dht_crawler_node_probed_streams_total)",
+          "hide": true,
           "interval": "",
           "legendFormat": "Announced",
           "refId": "C"
@@ -611,7 +612,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "rate(dht_crawler_node_working_streams_total[1h]) / rate(dht_crawler_node_probed_streams_total[1h])",
+          "expr": "rate(dht_crawler_node_working_streams_total[2h]) / rate(dht_crawler_node_probed_streams_total[2h])",
           "hide": false,
           "interval": "",
           "legendFormat": "Reachable (1h)",
@@ -1266,11 +1267,38 @@
       "type": "row"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1286,75 +1314,21 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
+        "h": 8,
+        "w": 12,
         "x": 0,
-        "y": 67
-      },
-      "id": 2,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "dht_node_peers_in_routing_table",
-          "interval": "",
-          "legendFormat": "known peers",
-          "refId": "A"
-        }
-      ],
-      "title": "DHT Node Peers",
-      "type": "stat"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "blue",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 3,
-        "y": 67
+        "y": 78
       },
       "id": 38,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -1364,7 +1338,11 @@
           "values": false
         },
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "8.2.2",
       "targets": [
@@ -1374,29 +1352,85 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "dht_node_storing_peers",
+          "expr": "histogram_quantile(0.999, sum(rate(dht_crawler_node_connections_found_bucket{}[120m])) by (le, instance)) ",
+          "hide": true,
           "interval": "",
-          "legendFormat": "known peers",
+          "legendFormat": "99.9%",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.99, sum(rate(dht_crawler_node_connections_found_bucket{}[120m])) by (le, instance)) ",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "99%",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.5, sum(rate(dht_crawler_node_connections_found_bucket{}[120m])) by (le, instance)) ",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "50%",
+          "refId": "C"
         }
       ],
-      "title": "DHT Announcing Peers",
-      "type": "stat"
+      "title": "Connections Found",
+      "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue",
+                "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           }
@@ -1404,16 +1438,21 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 9,
-        "y": 67
+        "h": 8,
+        "w": 11,
+        "x": 12,
+        "y": 78
       },
       "id": 40,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -1423,7 +1462,11 @@
           "values": false
         },
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "8.2.2",
       "targets": [
@@ -1433,56 +1476,113 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "dht_node_stored_blobs",
+          "expr": "histogram_quantile(0.999, sum(rate(dht_crawler_node_reachable_connections_found_bucket{}[120m])) by (le, instance)) ",
+          "hide": true,
           "interval": "",
-          "legendFormat": "known peers",
+          "legendFormat": "99.9%",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.99, sum(rate(dht_crawler_node_reachable_connections_found_bucket{}[120m])) by (le, instance)) ",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "99%",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.5, sum(rate(dht_crawler_node_reachable_connections_found_bucket{}[120m])) by (le, instance)) ",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "50%",
+          "refId": "C"
         }
       ],
-      "title": "DHT Total Stored Blobs",
-      "type": "stat"
+      "title": "Reachable Connections",
+      "type": "timeseries"
     },
     {
       "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue",
+                "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
-          }
+          },
+          "unit": "percentunit"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 15,
-        "y": 67
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 86
       },
-      "id": 39,
+      "id": 48,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
         },
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "8.2.2",
       "targets": [
@@ -1492,14 +1592,39 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(dht_node_peer_x_bit_colliding) * 256",
+          "expr": "1.0 - ((histogram_quantile(0.999, sum(rate(dht_crawler_node_connections_found_bucket{}[120m])) by (le, instance))) - (histogram_quantile(0.999, sum(rate(dht_crawler_node_reachable_connections_found_bucket{}[120m])) by (le, instance)))) / (histogram_quantile(0.999, sum(rate(dht_crawler_node_connections_found_bucket{}[120m])) by (le, instance)))",
+          "hide": true,
           "interval": "",
-          "legendFormat": "known peers",
+          "legendFormat": "99.9%",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "1.0 - ((histogram_quantile(0.99, sum(rate(dht_crawler_node_connections_found_bucket{}[120m])) by (le, instance))) - (histogram_quantile(0.99, sum(rate(dht_crawler_node_reachable_connections_found_bucket{}[120m])) by (le, instance)))) / (histogram_quantile(0.99, sum(rate(dht_crawler_node_connections_found_bucket{}[120m])) by (le, instance)))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "99%",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "1.0 - ((histogram_quantile(0.5, sum(rate(dht_crawler_node_connections_found_bucket{}[120m])) by (le, instance))) - (histogram_quantile(0.5, sum(rate(dht_crawler_node_reachable_connections_found_bucket{}[120m])) by (le, instance)))) / (histogram_quantile(0.5, sum(rate(dht_crawler_node_connections_found_bucket{}[120m])) by (le, instance)))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "50%",
+          "refId": "C"
         }
       ],
-      "title": "DHT Peers estimated from old method",
-      "type": "stat"
+      "title": "Reachable Fraction",
+      "type": "timeseries"
     }
   ],
   "refresh": "15m",
@@ -1517,5 +1642,5 @@
   "timezone": "",
   "title": "LBRY",
   "uid": "zqY5GYO7k",
-  "version": 3
+  "version": 7
 }
